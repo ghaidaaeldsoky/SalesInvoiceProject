@@ -110,10 +110,6 @@ public class InvoiceLayout extends javax.swing.JFrame {
 
         invoiceNum.setText("jLabel7");
 
-        invoiceDate.setText("jTextField1");
-
-        CusName.setText("jTextField1");
-
         invoiceTotal.setText("jLabel8");
 
         jMenu1.setText("File");
