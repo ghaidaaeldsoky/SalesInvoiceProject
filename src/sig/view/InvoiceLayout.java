@@ -6,6 +6,14 @@
 package sig.view;
 
 import controller.actionHandler;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.TableModel;
+import sig.model.InvoiceHeader;
+import sig.model.InvoiceHeaderTableModel;
+import sig.model.InvoiceLineTableModel;
 
 /**
  *
@@ -17,6 +25,7 @@ public class InvoiceLayout extends javax.swing.JFrame {
      * Creates new form InvoiceLayout
      */
     public InvoiceLayout() {
+        handler = new actionHandler(this);
         initComponents();
     }
 
@@ -31,6 +40,7 @@ public class InvoiceLayout extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         invoiceTable = new javax.swing.JTable();
+        invoiceTable.getSelectionModel().addListSelectionListener(handler);
 
         newInvoiceBtn = new javax.swing.JButton();
         newInvoiceBtn.addActionListener(handler);
@@ -64,13 +74,10 @@ public class InvoiceLayout extends javax.swing.JFrame {
 
         invoiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(invoiceTable);
@@ -93,22 +100,19 @@ public class InvoiceLayout extends javax.swing.JFrame {
 
         itemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        itemsTable.getSelectionModel().addListSelectionListener(handler);
+
         jScrollPane2.setViewportView(itemsTable);
 
         jLabel5.setText("Invoise Items :");
 
         jLabel6.setText("Invoices Table :");
-
-        invoiceNum.setText("jLabel7");
 
         invoiceTotal.setText("jLabel8");
 
@@ -272,6 +276,64 @@ public class InvoiceLayout extends javax.swing.JFrame {
     private javax.swing.JButton newItemBtn;
     private javax.swing.JMenuItem saveMenu;
     // End of variables declaration//GEN-END:variables
-private actionHandler handler = new actionHandler();
+private actionHandler handler ;
+private ArrayList<InvoiceHeader> InvoiceHeaderLists ;
+private InvoiceHeaderTableModel invoiceHedeartable ;
+private InvoiceLineTableModel invoiceLinetable;
+
+
+
+    public InvoiceLineTableModel getInvoiceLinetable() {
+        return invoiceLinetable;
+    }
+
+    public void setInvoiceLinetable(InvoiceLineTableModel invoiceLinetable) {
+        this.invoiceLinetable = invoiceLinetable;
+    }
+
+
+    public InvoiceHeaderTableModel getInvoiceHedeartable() {
+        return invoiceHedeartable;
+    }
+
+    public actionHandler getHandler() {
+        return handler;
+    }
+
+    public ArrayList<InvoiceHeader> getInvoiceHeaderLists() {
+        return InvoiceHeaderLists;
+    }
+
+    public void setInvoiceHeaderLists(ArrayList<InvoiceHeader> InvoiceHeaderLists) {
+        this.InvoiceHeaderLists = InvoiceHeaderLists;
+        invoiceHedeartable = new InvoiceHeaderTableModel(InvoiceHeaderLists);
+        this.invoiceTable.setModel(invoiceHedeartable);
+    }
+
+    public JTable getInvoiceTable() {
+        return invoiceTable;
+    }
+
+    public JTable getItemsTable() {
+        return itemsTable;
+    }
+
+    public JTextField getCusName() {
+        return CusName;
+    }
+
+    public JTextField getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public JLabel getInvoiceNum() {
+        return invoiceNum;
+    }
+
+    public JLabel getInvoiceTotal() {
+        return invoiceTotal;
+    }
+       
+    
 
 }
